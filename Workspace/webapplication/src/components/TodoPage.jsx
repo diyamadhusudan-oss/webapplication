@@ -32,6 +32,10 @@ export default function TodoPage({ todos, onTodosChange, onLogout }) {
     onTodosChange(todos.filter((todo) => todo.id !== id));
   }
 
+  function clearCompleted() {
+    onTodosChange(todos.filter((todo) => !todo.completed));
+  }
+
   function startEditing(todo) {
     setEditingId(todo.id);
     setEditingTitle(todo.title);
@@ -150,7 +154,12 @@ export default function TodoPage({ todos, onTodosChange, onLogout }) {
 
         <footer className="todo-footer">
           <span><span className="footer-dot" /> <strong>{remaining}</strong> {remaining === 1 ? 'task' : 'tasks'} left to do</span>
-          <span className="footer-note">TAKE IT ONE STEP AT A TIME <span aria-hidden="true">✦</span></span>
+          <div className="todo-footer-actions">
+            {todos.some((todo) => todo.completed) && (
+              <button className="clear-completed-button" type="button" onClick={clearCompleted}>Clear completed</button>
+            )}
+            <span className="footer-note">TAKE IT ONE STEP AT A TIME <span aria-hidden="true">✦</span></span>
+          </div>
         </footer>
       </section>
       <div className="page-decoration" aria-hidden="true">✳</div>

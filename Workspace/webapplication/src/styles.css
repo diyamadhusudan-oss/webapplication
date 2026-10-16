@@ -116,6 +116,9 @@ h1, h2, p { margin-top: 0; }
 .todo-footer { display: flex; justify-content: space-between; align-items: center; padding: 17px 2px; color: #92939c; font-size: 11px; }
 .todo-footer strong { color: #6252b9; }
 .footer-dot { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: #9c8be7; vertical-align: 1px; }
+.todo-footer-actions { display: flex; align-items: center; gap: 18px; }
+.clear-completed-button { padding: 4px 0; border: 0; background: transparent; color: #7563cb; font-size: 10px; font-weight: 600; }
+.clear-completed-button:hover { color: #5140a5; text-decoration: underline; }
 .footer-note { color: #aaaab3; font-size: 8px; font-weight: 700; letter-spacing: 1.1px; }
 .footer-note span { padding-left: 4px; color: #9a8add; font-size: 12px; }
 .page-decoration { position: absolute; top: 45%; right: 7%; color: #e4e1f2; font-size: 65px; }
@@ -149,6 +152,7 @@ h1, h2, p { margin-top: 0; }
   .filter-tabs { gap: 0; padding: 3px; }
   .filter-tab { padding: 7px 8px; font-size: 9px; }
   .todo-item { min-height: 57px; padding: 0 12px; }
-  .delete-button { opacity: 1; }
+  .edit-button, .delete-button { opacity: 1; }
+  .edit-todo-form { flex-wrap: wrap; }
   .footer-note { display: none; }
 }
