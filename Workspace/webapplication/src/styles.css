@@ -85,6 +85,11 @@ h1, h2, p { margin-top: 0; }
 .filter-tabs { display: flex; gap: 4px; padding: 4px; border: 1px solid #eaeaf0; border-radius: 8px; background: #fff; }
 .filter-tab { padding: 7px 11px; border: 0; border-radius: 5px; background: transparent; color: #92939d; font-size: 10px; }
 .filter-tab.active { background: #f0eefb; color: #6e5bcf; font-weight: 600; }
+.search-field { display: flex; align-items: center; gap: 10px; height: 43px; margin: 0 0 12px; padding: 0 13px; border: 1px solid #e9e8f0; border-radius: 8px; background: #fff; transition: border-color .18s, box-shadow .18s; }
+.search-field:focus-within { border-color: #a89be9; box-shadow: 0 0 0 3px #7763d91a; }
+.search-field svg { flex: 0 0 auto; width: 16px; height: 16px; fill: none; stroke: #a1a0ad; stroke-linecap: round; stroke-width: 1.6; }
+.search-field input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 12px; }
+.search-field input::placeholder { color: #a7a8b0; }
 .todo-list { overflow: hidden; border: 1px solid #e9e8ef; border-radius: 10px; background: #fff; }
 .todo-item { display: flex; align-items: center; gap: 13px; min-height: 61px; padding: 0 17px; border-bottom: 1px solid #f0eff4; animation: appear .2s ease-out; }
 .todo-item:last-child { border-bottom: 0; }

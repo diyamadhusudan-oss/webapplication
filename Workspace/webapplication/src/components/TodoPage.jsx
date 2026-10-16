@@ -5,13 +5,16 @@ const FILTERS = ['All', 'Active', 'Completed'];
 export default function TodoPage({ todos, onTodosChange, onLogout }) {
   const [newTodo, setNewTodo] = useState('');
   const [filter, setFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editingTitle, setEditingTitle] = useState('');
   const remaining = todos.filter((todo) => !todo.completed).length;
   const visibleTodos = todos.filter((todo) => {
-    if (filter === 'Active') return !todo.completed;
-    if (filter === 'Completed') return todo.completed;
-    return true;
+    const matchesFilter = filter === 'All'
+      || (filter === 'Active' && !todo.completed)
+      || (filter === 'Completed' && todo.completed);
+    const matchesSearch = todo.title.toLocaleLowerCase().includes(searchQuery.trim().toLocaleLowerCase());
+    return matchesFilter && matchesSearch;
   });
 
   function addTodo(event) {
@@ -111,6 +114,20 @@ export default function TodoPage({ todos, onTodosChange, onLogout }) {
           </div>
         </div>
 
+        <label className="search-field">
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <circle cx="8.7" cy="8.7" r="5.7" />
+            <path d="m13 13 4 4" />
+          </svg>
+          <input
+            type="search"
+            aria-label="Search tasks"
+            placeholder="Search your tasks..."
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
+        </label>
+
         <div className="todo-list" aria-live="polite">
           {visibleTodos.length > 0 ? visibleTodos.map((todo) => (
             <article className={`todo-item${todo.completed ? ' completed' : ''}`} key={todo.id}>
@@ -146,8 +163,16 @@ export default function TodoPage({ todos, onTodosChange, onLogout }) {
           )) : (
             <div className="empty-state">
               <span className="empty-icon" aria-hidden="true">✳</span>
-              <p className="empty-title">{filter === 'All' ? 'A little room to begin' : `No ${filter.toLowerCase()} tasks`}</p>
-              <p>{filter === 'All' ? 'Add a task above and make today yours.' : 'Try another filter or add a new task.'}</p>
+              <p className="empty-title">
+                {searchQuery.trim()
+                  ? 'No matching tasks'
+                  : filter === 'All' ? 'A little room to begin' : `No ${filter.toLowerCase()} tasks`}
+              </p>
+              <p>
+                {searchQuery.trim()
+                  ? 'Try another search or change the filter.'
+                  : filter === 'All' ? 'Add a task above and make today yours.' : 'Try another filter or add a new task.'}
+              </p>
             </div>
           )}
         </div>
